@@ -9,3 +9,4 @@ pandas
 numpy
 plotly
 matplotlib
+docx2txt
