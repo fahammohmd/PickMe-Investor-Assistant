@@ -1,0 +1,11 @@
+streamlit
+python-dotenv
+llama-index
+llama-index-llms-gemini
+llama-index-readers-file
+google-generativeai
+llama-index-embeddings-huggingface
+pandas
+numpy
+plotly
+matplotlib

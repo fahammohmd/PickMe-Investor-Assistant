@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# LlamaIndex
+/storage
+/image_storage
+/vector_store.json
+/docstore.json
+.ipynb_checkpoints/
+index/
+*.patch
+*.log
+
+# Streamlit
+.streamlit/
