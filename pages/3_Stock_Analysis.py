@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import os
+from dotenv import load_dotenv
+import google.generativeai as genai
 
 # --- Page Configuration ---
 st.set_page_config(
@@ -62,6 +65,42 @@ if stock_df is not None:
     
     st.markdown("---")
 
+    # --- AI Assistant for MA Interpretation ---
+    if st.button("💬 Ask PickMe Assistant for MA Interpretation"):
+        load_dotenv()
+        api_key = os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            st.error("Google API key not found. Please set it in the .env file.")
+        else:
+            genai.configure(api_key=api_key)
+            
+            latest_data = stock_df.iloc[-1]
+            prompt = f"""
+            As a technical analyst, interpret the stock trend based on the following moving average data.
+            The target audience is an investor familiar with basic technical indicators.
+
+            **Latest Data:**
+            - **Closing Price:** {latest_data['close']:,.2f} LKR
+            - **20-Day Moving Average:** {latest_data['ma_20']:,.2f} LKR
+            - **50-Day Moving Average:** {latest_data['ma_50']:,.2f} LKR
+
+            **Framework for Interpretation:**
+            1.  **Price vs. MAs:** Is the closing price above or below both MAs?
+            2.  **MA Crossover:** Is the 20-day MA above or below the 50-day MA? A "Golden Cross" (20-day MA crosses above 50-day MA) is bullish. A "Death Cross" (20-day MA crosses below 50-day MA) is bearish.
+
+            **Your Task:**
+            Provide a summary of the current trend. Conclude with a potential signal (e.g., "Bullish", "Bearish", "Neutral", "Mixed Signals") and a brief justification based on the moving averages. Keep the entire response to 3-5 sentences.
+            """
+            with st.spinner("PickMe Assistant is analyzing the trend..."):
+                try:
+                    model = genai.GenerativeModel('gemini-2.0-flash')
+                    response = model.generate_content(prompt)
+                    with st.chat_message("assistant"):
+                        st.markdown(response.text)
+                except Exception as e:
+                    st.error(f"An error occurred with the AI Assistant: {e}")
+    st.markdown("---")
+    
     # --- Charting Section ---
     tab1, tab2 = st.tabs(["Price Action", "Returns Analysis"])
 
