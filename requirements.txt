@@ -9,4 +9,5 @@ pandas
 numpy
 plotly
 matplotlib
-docx2txtpython-docx
+python-docx
+docx2txt
