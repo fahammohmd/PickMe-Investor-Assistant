@@ -25,10 +25,15 @@ def get_index(model_name="all-MiniLM-L6-v2"):
     """
     # Initialize embedding model
     embed_model = HuggingFaceEmbedding(model_name=model_name)
+    Settings.embed_model = embed_model # Set the embed_model in settings
 
-    if not os.path.exists(STORAGE_DIR):
-        print(f"Storage directory '{STORAGE_DIR}' not found. Creating a new index.")
-        os.makedirs(STORAGE_DIR)
+    # Check if a valid, non-empty index exists before trying to load
+    docstore_path = os.path.join(STORAGE_DIR, "docstore.json")
+
+    if not os.path.exists(docstore_path):
+        print(f"Index not found in '{STORAGE_DIR}'. Creating a new index.")
+        if not os.path.exists(STORAGE_DIR):
+            os.makedirs(STORAGE_DIR)
         
         # Load the documents from the data directory (search subfolders)
         try:
@@ -42,17 +47,17 @@ def get_index(model_name="all-MiniLM-L6-v2"):
             print(f"No readable files found in '{DATA_DIR}'. Found: {files}")
             raise
         
-        # Create the index from the documents using the HuggingFace embedder
-        index = VectorStoreIndex.from_documents(documents, embed_model=embed_model)
+        # Create the index from the documents
+        index = VectorStoreIndex.from_documents(documents)
         
         # Persist the index to disk
         index.storage_context.persist(persist_dir=STORAGE_DIR)
         print("Index created and persisted.")
     else:
-        print(f"Loading index from '{STORAGE_DIR}'.")
+        print(f"Loading existing index from '{STORAGE_DIR}'.")
         storage_context = StorageContext.from_defaults(persist_dir=STORAGE_DIR)
-        # Load the existing index using the same embedder
-        index = load_index_from_storage(storage_context, embed_model=embed_model)
+        # Load the existing index
+        index = load_index_from_storage(storage_context)
         print("Index loaded successfully.")
         
     return index
