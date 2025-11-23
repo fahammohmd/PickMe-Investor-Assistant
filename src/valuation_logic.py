@@ -5,15 +5,15 @@ import numpy as np
 
 # Hardcoded default assumptions for the static "Implied Price" calculation
 DEFAULT_FORECAST_ASSUMPTIONS = {
-    'revenue_y0': 1000,
-    'revenue_growth': [0.25, 0.22, 0.20, 0.18, 0.15, 0.12, 0.10, 0.08, 0.06, 0.05],
-    'ebitda_margin': [0.30] * 10,
-    'tax_rate': [0.25] * 10,
-    'da_percent_revenue': [0.05] * 10,
-    'capex_percent_revenue': [0.08] * 10,
-    'nwc_percent_revenue': [0.03] * 10,
-    'net_debt': 500,
-    'shares_outstanding': 100,
+    'revenue_y0': 5834554372,
+    'revenue_growth': [0.21] * 10, #[0.25, 0.22, 0.20, 0.18, 0.15, 0.12, 0.10, 0.08, 0.06, 0.05],
+    'ebitda_margin': [0.55] * 10,
+    'tax_rate': [0.3] * 10,
+    'da_percent_revenue': [0.1] * 10,
+    'capex_percent_revenue': [0.042] * 10,
+    'nwc_percent_revenue': [0.011] * 10,
+    'net_debt': 1572529949,
+    'shares_outstanding':  333323673,
 }
 DEFAULT_TERMINAL_ASSUMPTIONS = {'wacc': 0.09, 'terminal_growth_rate': 0.025}
 

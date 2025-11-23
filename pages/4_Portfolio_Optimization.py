@@ -78,8 +78,15 @@ main_tab1, main_tab2 = st.tabs(["PickMe Investment Scenario", "Markowitz Portfol
 # --- TAB 1: PickMe Investment Scenario ---
 with main_tab1:
     st.subheader("Calculate Potential Return for PickMe")
-    implied_price = get_default_implied_price()
     
+    # Check session state for the dynamic price from the Valuation page
+    if 'dynamic_implied_price' in st.session_state and st.session_state.dynamic_implied_price is not None:
+        implied_price = st.session_state.dynamic_implied_price
+        price_source = "(from your inputs on Valuation page)"
+    else:
+        implied_price = get_default_implied_price()
+        price_source = "(Default Base Case)"
+
     # Load ONLY PickMe data to get its true latest price
     pickme_df = load_stock_data("PickMe_Stock_Price_History.csv", is_pickme=True)
     if pickme_df is not None and not pickme_df.empty:
@@ -94,9 +101,9 @@ with main_tab1:
     with col2:
         st.markdown(
             f"""
-            <div style="background-color: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
-                <p style="font-size: 1em; color: grey; margin-bottom: 0;">Implied Share Price</p>
-                <p style="font-size: 2.5em; font-weight: bold; margin-top: 0;">LKR {implied_price:,.2f}</p>
+            <div style="background-color: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 10px; padding: 10px; text-align: center; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+                <p style="font-size: 0.9em; color: grey; margin-bottom: 0;">Implied Share Price {price_source}</p>
+                <p style="font-size: 2em; font-weight: bold; margin-top: 0;">LKR {implied_price:,.2f}</p>
             </div>
             """,
             unsafe_allow_html=True

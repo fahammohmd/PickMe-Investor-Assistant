@@ -17,6 +17,17 @@ st.set_page_config(
     layout="wide"
 )
 
+def format_large_number(num, currency="LKR"):
+    if np.isnan(num):
+        return "N/A"
+    if abs(num) >= 1_000_000_000:
+        return f"{currency} {num / 1_000_000_000:,.2f}B"
+    if abs(num) >= 1_000_000:
+        return f"{currency} {num / 1_000_000:,.2f}M"
+    if abs(num) >= 1_000:
+        return f"{currency} {num / 1_000:,.2f}K"
+    return f"{currency} {num:,.0f}"
+
 # --- Helper Functions (Visualization and Monte Carlo) ---
 def create_waterfall_chart(enterprise_value, net_debt, equity_value):
     """Creates a waterfall chart for the Enterprise to Equity Value bridge."""
@@ -94,6 +105,7 @@ st.info("Use the sidebar to adjust the terminal valuation assumptions and see th
 
 # --- Perform Calculations ---
 df_dcf, enterprise_value, equity_value, implied_share_price, terminal_value, pv_terminal_value = perform_dcf_calculation(terminal_assumptions, DEFAULT_FORECAST_ASSUMPTIONS)
+st.session_state.dynamic_implied_price = implied_share_price
 
 # --- Display Results ---
 upside_downside = (implied_share_price / terminal_assumptions['current_share_price']) - 1 if terminal_assumptions['current_share_price'] != 0 else 0
@@ -101,8 +113,8 @@ upside_downside = (implied_share_price / terminal_assumptions['current_share_pri
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Implied Share Price", f"LKR {implied_share_price:,.2f}" if not np.isnan(implied_share_price) else "N/A")
 col2.metric("Upside/Downside", f"{upside_downside:.2%}" if not np.isnan(upside_downside) else "N/A")
-col3.metric("Enterprise Value", f"LKR {enterprise_value:,.0f}" if not np.isnan(enterprise_value) else "N/A")
-col4.metric("Equity Value", f"LKR {equity_value:,.0f}" if not np.isnan(equity_value) else "N/A")
+col3.metric("Enterprise Value", format_large_number(enterprise_value))
+col4.metric("Equity Value", format_large_number(equity_value))
 
 st.markdown("---")
 
