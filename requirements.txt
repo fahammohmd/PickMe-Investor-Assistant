@@ -11,3 +11,4 @@ plotly
 matplotlib
 python-docx
 docx2txt
+scipy
