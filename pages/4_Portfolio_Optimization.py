@@ -101,9 +101,9 @@ with main_tab1:
     with col2:
         st.markdown(
             f"""
-            <div style="background-color: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 10px; padding: 10px; text-align: center; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
-                <p style="font-size: 0.9em; color: grey; margin-bottom: 0;">Implied Share Price {price_source_label}</p>
-                <p style="font-size: 2em; font-weight: bold; margin-top: 0;">{f"LKR {implied_price:,.2f}" if not np.isnan(implied_price) else "N/A"}</p>
+            <div style="background-color: var(--secondary-background-color); border-radius: 10px; padding: 10px; text-align: center; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+                <p style="font-size: 0.9em; color: var(--text-color); opacity: 0.7; margin-bottom: 0;">Implied Share Price {price_source_label}</p>
+                <p style="font-size: 2em; font-weight: bold; margin-top: 0; color: var(--text-color);">{f"LKR {implied_price:,.2f}" if not np.isnan(implied_price) else "N/A"}</p>
             </div>
             """,
             unsafe_allow_html=True
