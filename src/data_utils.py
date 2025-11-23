@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-import pandas_ta as ta
 import os
 import glob
 
@@ -31,16 +30,11 @@ def load_stock_data(filepath, is_pickme=False):
     # Remove duplicate dates, keeping the last entry
     df = df[~df.index.duplicated(keep='last')]
     
-    # Calculate Technical Indicators if we have the right columns
-    if 'close' in df.columns:
-        df['ma_20'] = df['close'].rolling(window=20).mean()
-        df['ma_50'] = df['close'].rolling(window=50).mean()
-        df['returns'] = df['close'].pct_change()
-        
-        # pandas_ta requires columns to be named in lowercase
-        df.ta.rsi(close=df['close'], length=14, append=True)
-        df.ta.macd(close=df['close'], fast=12, slow=26, signal=9, append=True)
-
+    # Calculate basic indicators
+    df['ma_20'] = df['close'].rolling(window=20).mean()
+    df['ma_50'] = df['close'].rolling(window=50).mean()
+    df['returns'] = df['close'].pct_change()
+    
     return df
 
 @st.cache_data
