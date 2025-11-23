@@ -82,10 +82,10 @@ with main_tab1:
     # Check session state for the dynamic price from the Valuation page
     if 'dynamic_implied_price' in st.session_state and st.session_state.dynamic_implied_price is not None and not np.isnan(st.session_state.dynamic_implied_price):
         implied_price = st.session_state.dynamic_implied_price
-        price_source_label = " (from your inputs on Valuation page)"
+        price_source_label = ""
     else:
-        implied_price = get_default_implied_price()
-        price_source_label = " (Default Base Case - Adjust in Valuation page)" # clearer hint
+        implied_price = np.nan # Set to NaN if not calculated yet
+        price_source_label = "(N/A - Please visit Valuation page to calculate)"
 
     # Load ONLY PickMe data to get its true latest price
     pickme_df = load_stock_data("PickMe_Stock_Price_History.csv", is_pickme=True)
@@ -102,8 +102,8 @@ with main_tab1:
         st.markdown(
             f"""
             <div style="background-color: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 10px; padding: 10px; text-align: center; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
-                <p style="font-size: 0.9em; color: grey; margin-bottom: 0;">Implied Share Price {price_source}</p>
-                <p style="font-size: 2em; font-weight: bold; margin-top: 0;">LKR {implied_price:,.2f}</p>
+                <p style="font-size: 0.9em; color: grey; margin-bottom: 0;">Implied Share Price {price_source_label}</p>
+                <p style="font-size: 2em; font-weight: bold; margin-top: 0;">{f"LKR {implied_price:,.2f}" if not np.isnan(implied_price) else "N/A"}</p>
             </div>
             """,
             unsafe_allow_html=True
