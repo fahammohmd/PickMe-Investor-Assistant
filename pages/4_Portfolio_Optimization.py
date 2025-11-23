@@ -80,12 +80,12 @@ with main_tab1:
     st.subheader("Calculate Potential Return for PickMe")
     
     # Check session state for the dynamic price from the Valuation page
-    if 'dynamic_implied_price' in st.session_state and st.session_state.dynamic_implied_price is not None:
+    if 'dynamic_implied_price' in st.session_state and st.session_state.dynamic_implied_price is not None and not np.isnan(st.session_state.dynamic_implied_price):
         implied_price = st.session_state.dynamic_implied_price
-        price_source = "(from your inputs on Valuation page)"
+        price_source_label = " (from your inputs on Valuation page)"
     else:
         implied_price = get_default_implied_price()
-        price_source = "(Default Base Case)"
+        price_source_label = " (Default Base Case - Adjust in Valuation page)" # clearer hint
 
     # Load ONLY PickMe data to get its true latest price
     pickme_df = load_stock_data("PickMe_Stock_Price_History.csv", is_pickme=True)
