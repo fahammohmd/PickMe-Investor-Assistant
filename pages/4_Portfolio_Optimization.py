@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 import plotly.express as px
 from scipy.optimize import minimize
 import os
+from dotenv import load_dotenv
+import google.generativeai as genai
 from src.valuation_logic import get_default_implied_price
 from src.data_utils import load_all_stock_data, load_stock_data
 
@@ -110,6 +112,47 @@ with main_tab1:
         col_res1.metric("Shares You Can Buy", f"{num_shares:,.2f}")
         col_res2.metric("Estimated Future Value", f"LKR {future_value:,.0f}")
         col_res3.metric("Potential Return", f"{potential_return:.2%}")
+
+        st.markdown("---")
+        if st.button("💬 Ask PickMe AI Assistant for Interpretation on Market Entry"):
+            load_dotenv()
+            api_key = os.getenv("GOOGLE_API_KEY")
+            if not api_key:
+                st.error("Google API key not found. Please set it in the .env file.")
+            else:
+                genai.configure(api_key=api_key)
+                
+                prompt = f"""
+                Act as a market strategist providing advice on market entry for PickMe stock.
+                Based on the following moving average data, provide an intelligent and comprehensive interpretation of the current market timing.
+
+                **Current Market Data:**
+                - Latest Closing Price: {latest_actual_price:,.2f} LKR
+                - 20-Day Moving Average (Short-term Trend): {pickme_df['ma_20'].iloc[-1]:,.2f} LKR
+                - 50-Day Moving Average (Mid-term Trend): {pickme_df['ma_50'].iloc[-1]:,.2f} LKR
+
+                **Framework for Analysis:**
+                - A price above both MAs can indicate bullish momentum (potential strength).
+                - A price below both MAs can indicate bearish momentum (potential weakness).
+                - A "Golden Cross" (short-term MA crossing above mid-term MA) is a classic bullish signal.
+                - A "Death Cross" (short-term MA crossing below mid-term MA) is a classic bearish signal.
+                - Consider the distance between the price and the MAs as an indicator of how extended a move might be.
+
+                **Your Task:**
+                1.  Provide a short analysis (2-3 sentences) of the current trend based on the data.
+                2.  Based on your analysis, suggest a potential strategy for an investor considering entering the market (e.g., "This could be a favorable entry point for trend-following investors," or "Investors might wait for signs of a reversal," or "The current setup suggests caution").
+                3.  Conclude with a brief note on how an investor might navigate this situation (e.g., "One might consider a partial entry and watch for a price pullback to the 20-day MA").
+
+                Keep the entire response concise and actionable.
+                """
+                with st.spinner("PickMe Assistant is analyzing the market entry..."):
+                    try:
+                        model = genai.GenerativeModel('gemini-2.0-flash')
+                        response = model.generate_content(prompt)
+                        with st.chat_message("assistant"):
+                            st.markdown(response.text)
+                    except Exception as e:
+                        st.error(f"An error occurred with the AI Assistant: {e}")
 
 # --- TAB 2: Portfolio Strategies ---
 with main_tab2:

@@ -107,7 +107,7 @@ col4.metric("Equity Value", f"LKR {equity_value:,.0f}" if not np.isnan(equity_va
 st.markdown("---")
 
 # --- AI Assistant Interpretation ---
-if st.button("💬 Ask PickMe Assistant for Interpretation"):
+if st.button("💬 Ask PickMe AI Assistant for Valuation Interpretation"):
     load_dotenv()
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:

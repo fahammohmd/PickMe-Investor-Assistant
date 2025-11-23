@@ -38,7 +38,7 @@ if stock_df is not None:
     st.markdown("---")
 
     # --- AI Assistant for MA Interpretation ---
-    if st.button("💬 Ask PickMe Assistant for MA Interpretation"):
+    if st.button("💬 Ask PickMe AI Assistant for MA Interpretation"):
         load_dotenv()
         api_key = os.getenv("GOOGLE_API_KEY")
         if not api_key:
