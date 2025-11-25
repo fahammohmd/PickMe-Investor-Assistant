@@ -28,6 +28,13 @@ def get_chat_engine():
     # Set up the LLM
     llm = Gemini(model="models/gemini-2.5-flash")
 
+    # Custom system prompt for the chatbot persona
+    custom_system_prompt = (
+        "You are an expert financial analyst. Based on the provided research and analysis, "
+        "offer comprehensive insights and respond to investor inquiries. "
+        "Phrase your answers as if they are derived from your own analysis and research."
+    )
+
     # Configure LlamaIndex settings
     Settings.llm = llm
     Settings.chunk_size = 512
@@ -41,7 +48,11 @@ def get_chat_engine():
     # object with a `response_gen` iterable (what `app.py` expects).
     engine = None
     try:
-        engine = index.as_chat_engine(streaming=True)
+        engine = index.as_chat_engine(
+            chat_mode="condense_plus_context",
+            system_prompt=custom_system_prompt,
+            streaming=True,
+        )
     except Exception:
         try:
             engine = index.as_query_engine(streaming=True)
