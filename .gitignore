@@ -20,3 +20,4 @@ index/
 
 # Streamlit
 .streamlit/
+.DS_Store

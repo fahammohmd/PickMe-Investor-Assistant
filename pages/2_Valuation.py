@@ -171,7 +171,7 @@ with tab1:
         st.warning("Cannot display chart due to invalid valuation inputs (e.g., WACC is less than or equal to Terminal Growth Rate).")
 
 with tab2:
-    st.header("Monte Carlo Simulation (1,000 runs)")
+    st.header("Monte Carlo Simulation")
     st.write("This simulation shows the distribution of possible implied share prices by varying WACC and Terminal Growth Rate.")
     if st.button("Run Monte Carlo Simulation"):
         with st.spinner("Running simulation..."):
