@@ -116,14 +116,3 @@ if stock_df is not None:
                                                     text=f"Mean: {mean_return:.4%}<br>Std Dev: {std_return:.4%}",
                                                     xref="paper", yref="paper", align="left")])
         st.plotly_chart(returns_fig, use_container_width=True)
-
-# Footer
-st.markdown("---")
-st.markdown(
-    """
-    <div style="text-align: center; padding: 10px;">
-        <p>developed by CFARC UOK Team A</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)

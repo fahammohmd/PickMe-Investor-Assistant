@@ -111,13 +111,4 @@ with col2:
 
 st.sidebar.success("Select a feature from the sidebar to begin your analysis.")
 
-# --- Footer ---
-st.markdown("---")
-st.markdown(
-    """
-    <div style="text-align: center; padding: 10px;">
-        <p>developed by CFARC UOK Team A</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+

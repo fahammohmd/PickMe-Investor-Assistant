@@ -191,14 +191,3 @@ with tab3:
     st.write("This table shows how the implied share price changes with WACC and the Terminal Growth Rate.")
     sensitivity_df = create_sensitivity_table(terminal_assumptions)
     st.dataframe(sensitivity_df.style.format("LKR {:,.2f}", na_rep="N/A").background_gradient(cmap='viridis'))
-
-# Footer
-st.markdown("---")
-st.markdown(
-    """
-    <div style="text-align: center; padding: 10px;">
-        <p>developed by CFARC UOK Team A</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)

@@ -231,14 +231,3 @@ with main_tab2:
                 fig_ef_ms.add_trace(go.Scatter(x=[max_sharpe_perf[1]], y=[max_sharpe_perf[0]], mode='markers', marker=dict(size=15, color='red', symbol='star'), name='This Portfolio'))
                 fig_ef_ms.update_layout(title='Efficient Frontier', xaxis_title='Annual Volatility (Risk)', yaxis_title='Annual Return', height=500)
                 st.plotly_chart(fig_ef_ms, use_container_width=True)
-
-# Footer
-st.markdown("---")
-st.markdown(
-    """
-    <div style="text-align: center; padding: 10px;">
-        <p>developed by CFARC UOK Team A</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
