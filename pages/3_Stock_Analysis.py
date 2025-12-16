@@ -15,10 +15,10 @@ st.set_page_config(
 )
 
 # --- Main Application ---
-st.title("📈 PickMe Stock Analysis")
+st.title("📈 PKME Stock Analysis")
 
 # Load the data using the shared utility function
-stock_df = load_stock_data("PickMe_Stock_Price_History.csv", is_pickme=True)
+stock_df = load_stock_data("PKME_Stock_Price_History.csv", is_pickme=True)
 
 if stock_df is not None:
     
@@ -38,7 +38,7 @@ if stock_df is not None:
     st.markdown("---")
 
     # --- AI Assistant for MA Interpretation ---
-    if st.button("💬 Ask PickMe AI Assistant for MA Interpretation"):
+    if st.button("💬 Ask PKME AI Assistant for MA Interpretation"):
         load_dotenv()
         api_key = os.getenv("GOOGLE_API_KEY")
         if not api_key:
@@ -63,7 +63,7 @@ if stock_df is not None:
             **Your Task:**
             In 3-4 sentences, provide a summary of the current trend (e.g., bullish, bearish, neutral). State the strength of the signal based on how the indicators align and conclude with a final signal (e.g., "Strong Bullish", "Weak Bearish", "Neutral").
             """
-            with st.spinner("PickMe Assistant is analyzing the trend..."):
+            with st.spinner("PKME Assistant is analyzing the trend..."):
                 try:
                     model = genai.GenerativeModel('gemini-2.0-flash')
                     response = model.generate_content(prompt)

@@ -73,11 +73,11 @@ st.title("⚙️ Portfolio Optimization")
 
 all_prices = load_all_stock_data()
 
-main_tab1, main_tab2 = st.tabs(["PickMe Investment Scenario", "Markowitz Portfolio Optimization"])
+main_tab1, main_tab2 = st.tabs(["PKME Investment Scenario", "Markowitz Portfolio Optimization"])
 
-# --- TAB 1: PickMe Investment Scenario ---
+# --- TAB 1: PKME Investment Scenario ---
 with main_tab1:
-    st.subheader("Calculate Potential Return for PickMe")
+    st.subheader("Calculate Potential Return for PKME")
     
     # Check session state for the dynamic price from the Valuation page
     if 'dynamic_implied_price' in st.session_state and st.session_state.dynamic_implied_price is not None and not np.isnan(st.session_state.dynamic_implied_price):
@@ -87,8 +87,8 @@ with main_tab1:
         implied_price = np.nan # Set to NaN if not calculated yet
         price_source_label = "(N/A - Please visit Valuation page to calculate)"
 
-    # Load ONLY PickMe data to get its true latest price
-    pickme_df = load_stock_data("PickMe_Stock_Price_History.csv", is_pickme=True)
+    # Load ONLY PKME data to get its true latest price
+    pickme_df = load_stock_data("PKME_Stock_Price_History.csv", is_pickme=True)
     if pickme_df is not None and not pickme_df.empty:
         latest_actual_price = pickme_df['close'].iloc[-1]
     else:
@@ -96,7 +96,7 @@ with main_tab1:
 
     col1, col2 = st.columns(2)
     with col1:
-        investment_amount = st.number_input("Amount to Invest in PickMe (LKR)", min_value=1000, value=100000, step=1000)
+        investment_amount = st.number_input("Amount to Invest in PKME (LKR)", min_value=1000, value=100000, step=1000)
         current_price = st.number_input("Current Share Price (LKR)", value=float(latest_actual_price))
     with col2:
         st.markdown(
@@ -121,7 +121,7 @@ with main_tab1:
         col_res3.metric("Potential Return", f"{potential_return:.2%}")
 
         st.markdown("---")
-        if st.button("💬 Ask PickMe AI Assistant for Interpretation on Market Entry"):
+        if st.button("💬 Ask PKME AI Assistant for Interpretation on Market Entry"):
             load_dotenv()
             api_key = os.getenv("GOOGLE_API_KEY")
             if not api_key:
@@ -130,7 +130,7 @@ with main_tab1:
                 genai.configure(api_key=api_key)
                 
                 prompt = f"""
-                Act as a market strategist providing advice on market entry for PickMe stock.
+                Act as a market strategist providing advice on market entry for PKME stock.
                 Based on the following moving average data, provide an intelligent and comprehensive interpretation of the current market timing.
 
                 **Current Market Data:**
@@ -152,7 +152,7 @@ with main_tab1:
 
                 Keep the entire response concise and actionable.
                 """
-                with st.spinner("PickMe Assistant is analyzing the market entry..."):
+                with st.spinner("PKME Assistant is analyzing the market entry..."):
                     try:
                         model = genai.GenerativeModel('gemini-2.0-flash')
                         response = model.generate_content(prompt)
@@ -167,7 +167,7 @@ with main_tab2:
         st.error("Could not load stock price data. Please check the CSV files.")
     else:
         all_tickers = all_prices.columns.tolist()
-        default_selection = [ticker for ticker in ['PickMe', 'HHL', 'TJL'] if ticker in all_tickers]
+        default_selection = [ticker for ticker in ['PKME', 'HHL', 'TJL'] if ticker in all_tickers]
         
         selected_stocks = st.multiselect("Select stocks for the portfolio:", options=all_tickers, default=default_selection)
         risk_free_rate = st.slider("Risk-Free Rate (%)", 0.0, 20.0, 5.0, 0.1) / 100.0

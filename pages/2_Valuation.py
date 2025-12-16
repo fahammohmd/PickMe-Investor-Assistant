@@ -85,7 +85,7 @@ def create_sensitivity_table(terminal_assumptions):
     return df_sensitivity
 
 # --- Load Data for Default Price ---
-pickme_data = load_stock_data("PickMe_Stock_Price_History.csv", is_pickme=True)
+pickme_data = load_stock_data("PKME_Stock_Price_History.csv", is_pickme=True)
 if pickme_data is not None and not pickme_data.empty:
     latest_actual_price = pickme_data['close'].iloc[-1]
 else:
@@ -94,8 +94,8 @@ else:
 # --- Sidebar Inputs ---
 st.sidebar.header("Terminal Value Assumptions")
 terminal_assumptions = {
-    'wacc': st.sidebar.slider("WACC (%)", 10.0, 30.0, 15.0, 0.1) / 100.0,
-    'terminal_growth_rate': st.sidebar.slider("Terminal Growth Rate (%)", 1.0, 10.0, 5.0, 0.1) / 100.0,
+    'wacc': st.sidebar.slider("WACC (%)", 10.0, 30.0, 14.3, 0.1) / 100.0,
+    'terminal_growth_rate': st.sidebar.slider("Terminal Growth Rate (%)", 1.0, 10.0, 3.0, 0.1) / 100.0,
     'current_share_price': st.sidebar.number_input("Current Share Price", value=float(latest_actual_price)),
 }
 
@@ -119,7 +119,7 @@ col4.metric("Equity Value", format_large_number(equity_value))
 st.markdown("---")
 
 # --- AI Assistant Interpretation ---
-if st.button("💬 Ask PickMe AI Assistant for Valuation Interpretation"):
+if st.button("💬 Ask PKME AI Assistant for Valuation Interpretation"):
     load_dotenv()
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
@@ -142,7 +142,7 @@ if st.button("💬 Ask PickMe AI Assistant for Valuation Interpretation"):
         **Your Task:**
         In 3-4 sentences, state whether the stock appears undervalued or overvalued based on this model. Briefly explain what the 'Potential Upside/Downside' signifies and conclude with a crucial caveat about the valuation's sensitivity to the key assumptions.
         """
-        with st.spinner("PickMe Assistant is thinking..."):
+        with st.spinner("PKME Assistant is thinking..."):
             try:
                 model = genai.GenerativeModel('gemini-2.0-flash')
                 response = model.generate_content(prompt)

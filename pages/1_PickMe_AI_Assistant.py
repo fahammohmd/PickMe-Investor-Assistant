@@ -1,10 +1,10 @@
 import streamlit as st
 from src.chatbot import get_chat_engine
 
-st.set_page_config(page_title="PickMe AI Assistant", page_icon="🤖")
+st.set_page_config(page_title="PKME AI Assistant", page_icon="🤖")
 
-st.title("PickMe AI Assistant")
-st.info("You can ask any questions on PickMe")
+st.title("PKME AI Assistant")
+st.info("You can ask any questions on PKME")
 
 @st.cache_resource
 def init_chat_engine():

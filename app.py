@@ -2,7 +2,7 @@ import streamlit as st
 
 # --- Page Configuration ---
 st.set_page_config(
-    page_title="PickMe Investor Assistant",
+    page_title="PKME Investor Assistant",
     page_icon="👋",
     layout="wide"
 )
@@ -48,21 +48,21 @@ body.dark .feature-card {
 
 # --- Header and App Purpose ---
 st.info("For the best experience, please open this application on a desktop or laptop.")
-st.title("Welcome to the PickMe Investor Assistant!")
+st.title("Welcome to the PKME Investor Assistant!")
 st.subheader("Your AI-Powered Companion for Investment Research and Decision Making")
 st.markdown("---")
 st.markdown("""
 Our mission is to empower investors by providing intelligent tools to navigate investment research reports and make informed decisions. 
-Here's how the PickMe Investor Assistant helps you at every step:
+Here's how the PKME Investor Assistant helps you at every step:
 """)
 
 # --- Investor Workflow ---
 st.markdown("### Investor Workflow:")
 st.markdown("""
-1.  **Insight Generation:** Start by engaging with the **PickMe AI Assistant**. Ask questions about research reports or investment theses to extract key insights and clarify complex information.
+1.  **Insight Generation:** Start by engaging with the **PKME AI Assistant**. Ask questions about research reports or investment theses to extract key insights and clarify complex information.
 2.  **In-depth Valuation:** Transition to the **Valuation** page. Based on the insights gained, adjust critical assumptions in a dynamic DCF model to derive a fundamental valuation.
-3.  **Market Behavior Analysis:** Utilize the **Stock Analysis** page to understand PickMe's current market behavior, analyzing price action and moving averages to gauge market sentiment.
-4.  **Strategic Portfolio Management:** Finally, move to **Portfolio Optimization**. Simulate investment scenarios and construct diversified portfolios to see how PickMe fits into a broader strategy.
+3.  **Market Behavior Analysis:** Utilize the **Stock Analysis** page to understand PKME's current market behavior, analyzing price action and moving averages to gauge market sentiment.
+4.  **Strategic Portfolio Management:** Finally, move to **Portfolio Optimization**. Simulate investment scenarios and construct diversified portfolios to see how PKME fits into a broader strategy.
 """)
 
 st.markdown("---")
@@ -75,7 +75,7 @@ with col1:
     st.markdown("""
     <div class="feature-card">
         <div class="icon">🤖</div>
-        <h3>PickMe AI Assistant</h3>
+        <h3>PKME AI Assistant</h3>
         <div class="description">Engage in conversational AI to quickly understand research reports and clarify investment theses.</div>
     </div>
     """, unsafe_allow_html=True)
@@ -86,7 +86,7 @@ with col1:
     <div class="feature-card">
         <div class="icon">📈</div>
         <h3>Stock Analysis</h3>
-        <div class="description">Analyze PickMe's historical price, volume, and moving averages with AI guidance on market entry.</div>
+        <div class="description">Analyze PKME's historical price, volume, and moving averages with AI guidance on market entry.</div>
     </div>
     """, unsafe_allow_html=True)
 

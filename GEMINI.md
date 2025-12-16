@@ -1,14 +1,14 @@
-# PickMe Investor Assistant
+# PKME Investor Assistant
 
 ## Project Overview
 
-This project is a Python-based chatbot application named "PickMe Investor Assistant". It's designed to answer questions about documents related to "PickMe" and assist with investment research and decision-making. The application uses a Retrieval-Augmented Generation (RAG) architecture and provides additional tools for valuation, stock analysis, and portfolio optimization.
+This project is a Python-based chatbot application named "PKME Investor Assistant". It's designed to answer questions about documents related to "PKME" and assist with investment research and decision-making. The application uses a Retrieval-Augmented Generation (RAG) architecture and provides additional tools for valuation, stock analysis, and portfolio optimization.
 
 The core technologies used are:
 -   **Streamlit:** For building the interactive web-based chat interface and other analytical tools.
 -   **LlamaIndex:** As the data framework for building the RAG pipeline. It handles data loading, indexing, and querying.
 -   **Google Gemini:**
-    *   The `gemini-2.5-flash` model is used as the Language Model (LLM) for the main chatbot in the "PickMe AI Assistant" page.
+    *   The `gemini-2.5-flash` model is used as the Language Model (LLM) for the main chatbot in the "PKME AI Assistant" page.
     *   The `gemini-2.0-flash` model is used for generating interpretations on the "Valuation", "Stock Analysis", and "Portfolio Optimization" pages. (Note: The code uses `gemini-2.5-flash` for the LLM. If you want to change it to `gemini-pro`, you would need to modify `src/chatbot.py`.)
 -   **HuggingFace Embeddings:** The `all-MiniLM-L6-v2` model is used to generate embeddings for the documents and user queries.
 -   **Pandas, NumPy, Plotly, Matplotlib, SciPy:** For data analysis, visualization, and scientific computing in the valuation, stock analysis, and portfolio optimization sections.
@@ -17,7 +17,7 @@ The core technologies used are:
 The application works by:
 1.  Loading documents from the `Data/` directory.
 2.  Creating a vector index of the documents and storing it in the `storage/` directory for persistence. The index is automatically rebuilt if the data in `Data/` changes.
-3.  When a user asks a question via the "PickMe AI Assistant", the application queries the index to find relevant document chunks.
+3.  When a user asks a question via the "PKME AI Assistant", the application queries the index to find relevant document chunks.
 4.  The retrieved context and the user's question are then passed to the Gemini LLM to generate a conversational answer.
 5.  Other pages (Valuation, Stock Analysis, Portfolio Optimization) provide tools for financial analysis and visualization.
 

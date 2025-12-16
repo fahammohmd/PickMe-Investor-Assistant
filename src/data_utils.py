@@ -59,16 +59,16 @@ def load_all_stock_data():
         except Exception:
             continue
             
-    # Load PickMe separately to ensure it's included
+    # Load PKME separately to ensure it's included
     try:
-        pickme_df = pd.read_csv("PickMe_Stock_Price_History.csv")
+        pickme_df = pd.read_csv("PKME_Stock_Price_History.csv")
         pickme_df.columns = ['date', 'open', 'high', 'low', 'close', 'trade_volume', 'share_volume', 'turnover']
         pickme_df['date'] = pd.to_datetime(pickme_df['date'])
         pickme_df = pickme_df.sort_values('date').set_index('date')
         pickme_df = pickme_df[~pickme_df.index.duplicated(keep='last')]
-        all_dfs['PickMe'] = pickme_df['close']
+        all_dfs['PKME'] = pickme_df['close']
     except Exception:
-        st.error("Could not load PickMe_Stock_Price_History.csv")
+        st.error("Could not load PKME_Stock_Price_History.csv")
 
     if not all_dfs:
         return None
