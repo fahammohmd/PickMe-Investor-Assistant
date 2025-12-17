@@ -34,7 +34,7 @@ def create_waterfall_chart(enterprise_value, net_debt, equity_value):
     fig = go.Figure(go.Waterfall(
         name="bridge", orientation="v",
         measure=["relative", "relative", "total"],
-        x=["Enterprise Value", "Net Debt", "Equity Value"],
+                x = ["Enterprise Value", "Net Adjustments", "Equity Value"],
         textposition="outside",
         text=[f"LKR {enterprise_value:,.0f}", f"LKR {-net_debt:,.0f}", f"LKR {equity_value:,.0f}"],
         y=[enterprise_value, -net_debt, equity_value],
@@ -157,9 +157,9 @@ st.markdown("---")
 tab1, tab2, tab3 = st.tabs(["Enterprise Value Bridge", "Monte Carlo Simulation", "Sensitivity Analysis"])
 
 with tab1:
-    st.header("Enterprise to Equity Value Bridge")
+    st.header("Enterprise Value Bridge")
     if not np.isnan(enterprise_value):
-        st.plotly_chart(create_waterfall_chart(enterprise_value, DEFAULT_FORECAST_ASSUMPTIONS['net_debt'], equity_value), use_container_width=True)
+        st.plotly_chart(create_waterfall_chart(enterprise_value, DEFAULT_FORECAST_ASSUMPTIONS['net_adjustments'], equity_value), use_container_width=True)
         st.subheader("Enterprise Value Components")
         ev_components = pd.DataFrame({
             'Component': ['PV of Explicit FCFs', 'PV of Terminal Value'],
@@ -189,5 +189,6 @@ with tab2:
 with tab3:
     st.header("Sensitivity Analysis")
     st.write("This table shows how the implied share price changes with WACC and the Terminal Growth Rate.")
+    
     sensitivity_df = create_sensitivity_table(terminal_assumptions)
     st.dataframe(sensitivity_df.style.format("LKR {:,.2f}", na_rep="N/A").background_gradient(cmap='viridis'))
