@@ -16,15 +16,20 @@ def load_stock_data(filepath, is_pickme=False):
 
     # Clean column names based on file type
     if is_pickme:
-        df.columns = [
-            'date', 'open', 'high', 'low', 'close', 
-            'trade_volume', 'share_volume', 'turnover'
-        ]
+        df.columns = ['date', 'open', 'high', 'low', 'close', 'trade_volume', 'share_volume', 'turnover']
     else:
         df.columns = [col.strip().lower().replace(' (rs.)', '').replace(' ', '_') for col in df.columns]
 
+    # Convert date and numeric columns, coercing errors
     df = df.rename(columns={'trade_date': 'date'})
-    df['date'] = pd.to_datetime(df['date'])
+    numeric_cols = ['open', 'high', 'low', 'close', 'trade_volume', 'share_volume', 'turnover']
+    for col in numeric_cols:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+            
+    df['date'] = pd.to_datetime(df['date'], errors='coerce')
+    df.dropna(subset=['date', 'open', 'high', 'low', 'close'], inplace=True)
+    
     df = df.sort_values('date').set_index('date')
     
     # Remove duplicate dates, keeping the last entry
