@@ -18,7 +18,12 @@ st.markdown("---")
 
 st.markdown("""
 Our mission is to empower investors by providing intelligent tools to navigate investment research reports and make informed decisions. 
-Here's how the PKME Investor Assistant helps you at every step:
+Here's how the PKME Investor Assistant helps you at every step: 
+
+1. **Understand Research Reports**: Use our AI assistant to break down complex research into digestible insights.
+2. **Analyze Stock Performance**: Dive into PKME's historical stock data with AI-driven analysis to identify trends and opportunities.
+3. **Optimize Your Portfolio**: Leverage advanced portfolio optimization techniques to balance risk and return effectively.
+
 """)
 
 st.markdown("---")
@@ -42,3 +47,10 @@ with col2:
     st.write("Simulate portfolios, optimize for risk-return (Min Variance, Max Sharpe), and visualize allocations.")
 
 st.sidebar.success("Select a feature from the sidebar to begin your analysis.")
+
+st.markdown("---")
+st.header("Navigate to a Page")
+st.page_link("pages/1_PickMe_AI_Assistant.py", label="PickMe AI Assistant", icon="🤖")
+st.page_link("pages/2_Valuation.py", label="Valuation", icon="📊")
+st.page_link("pages/3_Stock_Analysis.py", label="Stock Analysis", icon="📈")
+st.page_link("pages/4_Portfolio_Optimization.py", label="Portfolio Optimization", icon="⚙️")
