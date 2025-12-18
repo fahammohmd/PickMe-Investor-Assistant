@@ -113,6 +113,6 @@ if stock_df is not None:
         returns_fig.update_layout(title_text='Distribution of Daily Returns',
                                   xaxis_title_text='Daily Return', yaxis_title_text='Frequency',
                                   annotations=[dict(x=0.05, y=0.95, showarrow=False,
-                                                    text=f"Mean: {mean_return:.4%}<br>Std Dev: {std_return:.4%}",
+                                                    text=f"Mean: {mean_return:.1%}<br>Std Dev: {std_return:.1%}",
                                                     xref="paper", yref="paper", align="left")])
         st.plotly_chart(returns_fig, use_container_width=True)

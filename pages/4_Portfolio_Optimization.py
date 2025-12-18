@@ -118,7 +118,7 @@ with main_tab1:
         col_res1, col_res2, col_res3 = st.columns(3)
         col_res1.metric("Shares You Can Buy", f"{num_shares:,.2f}")
         col_res2.metric("Estimated Future Value", f"LKR {future_value:,.0f}")
-        col_res3.metric("Potential Return", f"{potential_return:.2%}")
+        col_res3.metric("Potential Return", f"{potential_return:.1%}")
 
         st.markdown("---")
         if st.button("💬 Ask PKME AI Assistant for Interpretation on Market Entry"):
@@ -192,8 +192,8 @@ with main_tab2:
 
             with sub_tab1:
                 st.subheader("Portfolio with Minimum Risk")
-                st.metric("Expected Annual Return", f"{min_var_perf[0]:.2%}")
-                st.metric("Expected Annual Volatility", f"{min_var_perf[1]:.2%}")
+                st.metric("Expected Annual Return", f"{min_var_perf[0]:.1%}")
+                st.metric("Expected Annual Volatility", f"{min_var_perf[1]:.1%}")
                 
                 st.markdown("##### Asset Allocation")
                 res_col_mv1, res_col_mv2 = st.columns([0.6, 0.4])
@@ -202,7 +202,7 @@ with main_tab2:
                     fig_mv = px.pie(min_var_df, values='Weight', names='Asset', title='Minimum Variance Asset Allocation')
                     st.plotly_chart(fig_mv, use_container_width=True)
                 with res_col_mv2:
-                    st.dataframe(min_var_df.style.format({'Weight': '{:.2%}'}))
+                    st.dataframe(min_var_df.style.format({'Weight': '{:.1%}'}))
                 
                 st.markdown("##### Efficient Frontier")
                 fig_ef_mv = go.Figure()
@@ -213,8 +213,8 @@ with main_tab2:
 
             with sub_tab2:
                 st.subheader("Portfolio with Maximum Risk-Adjusted Return")
-                st.metric("Expected Annual Return", f"{max_sharpe_perf[0]:.2%}")
-                st.metric("Expected Annual Volatility", f"{max_sharpe_perf[1]:.2%}")
+                st.metric("Expected Annual Return", f"{max_sharpe_perf[0]:.1%}")
+                st.metric("Expected Annual Volatility", f"{max_sharpe_perf[1]:.1%}")
                 
                 st.markdown("##### Asset Allocation")
                 res_col_ms1, res_col_ms2 = st.columns([0.6, 0.4])
@@ -223,7 +223,7 @@ with main_tab2:
                     fig_ms = px.pie(max_sharpe_df, values='Weight', names='Asset', title='Max Sharpe Ratio Asset Allocation')
                     st.plotly_chart(fig_ms, use_container_width=True)
                 with res_col_ms2:
-                    st.dataframe(max_sharpe_df.style.format({'Weight': '{:.2%}'}))
+                    st.dataframe(max_sharpe_df.style.format({'Weight': '{:.1%}'}))
                 
                 st.markdown("##### Efficient Frontier")
                 fig_ef_ms = go.Figure()

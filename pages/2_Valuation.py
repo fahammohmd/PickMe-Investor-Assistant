@@ -79,8 +79,8 @@ def create_sensitivity_table(terminal_assumptions):
         
     df_sensitivity = pd.DataFrame(
         sensitivity_data,
-        index=[f"{w:.2%}" for w in wacc_range],
-        columns=[f"{g:.2%}" for g in terminal_growth_range]
+        index=[f"{w:.1%}" for w in wacc_range],
+        columns=[f"{g:.1%}" for g in terminal_growth_range]
     )
     return df_sensitivity
 
@@ -112,7 +112,7 @@ upside_downside = (implied_share_price / terminal_assumptions['current_share_pri
 
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Implied Share Price", f"LKR {implied_share_price:,.2f}" if not np.isnan(implied_share_price) else "N/A")
-col2.metric("Upside/Downside", f"{upside_downside:.2%}" if not np.isnan(upside_downside) else "N/A")
+col2.metric("Upside/Downside", f"{upside_downside:.1%}" if not np.isnan(upside_downside) else "N/A")
 col3.metric("Enterprise Value", format_large_number(enterprise_value))
 col4.metric("Equity Value", format_large_number(equity_value))
 
@@ -133,11 +133,11 @@ if st.button("💬 Ask PKME AI Assistant for Valuation Interpretation"):
         **Valuation Data:**
         - Implied Share Price (Our DCF Result): {implied_share_price:,.2f} LKR
         - Current Market Price: {terminal_assumptions['current_share_price']:,.2f} LKR
-        - Potential Upside/Downside: {upside_downside:.2%}
+        - Potential Upside/Downside: {upside_downside:.1%}
 
         **Key Assumptions:**
-        - WACC: {terminal_assumptions['wacc']:.2%}
-        - Terminal Growth Rate: {terminal_assumptions['terminal_growth_rate']:.2%}
+        - WACC: {terminal_assumptions['wacc']:.1%}
+        - Terminal Growth Rate: {terminal_assumptions['terminal_growth_rate']:.1%}
 
         **Your Task:**
         In 3-4 sentences, state whether the stock appears undervalued or overvalued based on this model. Briefly explain what the 'Potential Upside/Downside' signifies and conclude with a crucial caveat about the valuation's sensitivity to the key assumptions.
