@@ -39,12 +39,19 @@ if prompt := st.chat_input("What is up?"):
             response = chat_engine.stream_chat(prompt)
             response_str = ""
             response_container = st.empty()
-            for token in response.response_gen:
-                response_str += token
-                response_container.markdown(response_str)
-            
-            st.session_state.messages.append(
-                {"role": "assistant", "content": response_str}
-            )
+            try:
+                for token in response.response_gen:
+                    response_str += token
+                    response_container.markdown(response_str)
+                
+                st.session_state.messages.append(
+                    {"role": "assistant", "content": response_str}
+                )
+            except IndexError:
+                error_message = "The AI's response was empty or blocked, possibly due to safety filters. Please try rephrasing your question."
+                response_container.error(error_message)
+                st.session_state.messages.append(
+                    {"role": "assistant", "content": error_message}
+                )
 
 
