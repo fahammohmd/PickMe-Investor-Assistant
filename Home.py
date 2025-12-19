@@ -21,8 +21,9 @@ Our mission is to empower investors by providing intelligent tools to navigate i
 Here's how the PKME Investor Assistant helps you at every step: 
 
 1. **Understand Research Reports**: Use our AI assistant to break down complex research into digestible insights.
-2. **Analyze Stock Performance**: Dive into PKME's historical stock data with AI-driven analysis to identify trends and opportunities.
-3. **Optimize Your Portfolio**: Leverage advanced portfolio optimization techniques to balance risk and return effectively.
+2. **Customize Valuation**: Translate your insights into numbers. Adjust key valuation assumptions based on your own judgment.
+3. **Analyze Stock Performance**: Dive into PKME's historical stock data with AI-driven analysis to identify trends and opportunities.
+4. **Optimize Your Portfolio**: Simulate your portfolio with PKME stock, optimize for risk-return profiles, and visualize allocations effectively.
 
 """)
 
