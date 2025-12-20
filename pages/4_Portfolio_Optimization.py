@@ -170,7 +170,7 @@ with main_tab2:
         default_selection = [ticker for ticker in ['PKME', 'HHL', 'TJL'] if ticker in all_tickers]
         
         selected_stocks = st.multiselect("Select stocks for the portfolio:", options=all_tickers, default=default_selection)
-        risk_free_rate = st.slider("Risk-Free Rate (%)", 0.0, 20.0, 5.0, 0.1) / 100.0
+        risk_free_rate = st.slider("Risk-Free Rate (%)", 0.0, 20.0, 10.8, 0.1) / 100.0
         
         if len(selected_stocks) < 2:
             st.warning("Please select at least two stocks for optimization.")
