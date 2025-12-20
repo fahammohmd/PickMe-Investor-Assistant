@@ -9,7 +9,7 @@ DEFAULT_FORECAST_ASSUMPTIONS = {
         1241793558, 1125496234, 2162454601, 4391014761, 5652970707,
         6575053076, 7955001263, 9562063303, 11418747504, 13546453598
     ],
-    'net_adjustments':   -822499000,
+    'net_adjustments':   -815499000,
     'shares_outstanding': 333323673,
 }
 DEFAULT_TERMINAL_ASSUMPTIONS = {'wacc': 0.10, 'terminal_growth_rate': 0.03}
